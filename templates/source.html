@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{page_title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Quotes pulled from {{source_domain}}" />
+    <style>
+      body {
+        font-family: "Atkinson Hyperlegible", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 0;
+        color: #1f2933;
+      }
+      header {
+        background: white;
+        padding: 2.5rem 1.5rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #d1d5db;
+      }
+      h1 {
+        font-size: 2rem;
+        margin: 0;
+      }
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        display: grid;
+        gap: 1rem;
+      }
+      article {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      }
+      blockquote {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+      cite {
+        display: block;
+        margin-top: 0.75rem;
+        font-style: normal;
+        color: #52606d;
+      }
+      .meta {
+        display: flex;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #7b8794;
+        gap: 1rem;
+      }
+      .meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+      a {
+        color: #1d4ed8;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>{{page_title}}</h1>
+      <p><a href="{{source_url}}">Back to the original article</a></p>
+    </header>
+    <main>
+      {{quote_items}}
+    </main>
+  </body>
+</html>

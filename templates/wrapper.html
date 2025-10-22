@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{page_title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{meta_description}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{og_title}}" />
+    <meta property="og:description" content="{{og_description}}" />
+    <meta property="og:image" content="{{og_image}}" />
+    <meta property="og:url" content="{{canonical_url}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{og_title}}" />
+    <meta name="twitter:description" content="{{og_description}}" />
+    <meta name="twitter:image" content="{{og_image}}" />
+    <meta http-equiv="refresh" content="0; url={{source_url}}" />
+    <link rel="canonical" href="{{source_url}}" />
+    <style>
+      :root { color-scheme: light; }
+      body {
+        font-family: "Atkinson Hyperlegible", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        max-width: 640px;
+        margin: 4rem auto;
+        padding: 0 1.5rem;
+        line-height: 1.6;
+        color: #1f2933;
+      }
+      blockquote {
+        margin: 0 0 1.5rem;
+        padding-left: 1rem;
+        border-left: 4px solid #d1d5db;
+        font-size: 1.2rem;
+      }
+      cite {
+        display: block;
+        font-style: normal;
+        font-weight: 600;
+        margin-top: 0.25rem;
+      }
+      .meta {
+        font-size: 0.9rem;
+        color: #52606d;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+      .note {
+        margin-top: 2rem;
+        font-size: 0.85rem;
+        color: #7b8794;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <blockquote>“{{quote_text}}”</blockquote>
+      <cite>{{quote_author}}</cite>
+      {{#article_title}}
+      <div class="meta">From <a href="{{source_url}}">{{article_title}}</a></div>
+      {{/article_title}}
+      <div class="note">You are being redirected to the original source. If the page does not load automatically, <a href="{{source_url}}">tap here</a>.</div>
+    </main>
+    <script>
+      window.location.replace("{{source_url}}");
+    </script>
+  </body>
+</html>

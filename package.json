@@ -1,0 +1,24 @@
+{
+  "name": "quote-cards",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static-first quote card generator rendering PNGs and wrapper pages from Markdown quotes.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node render.mjs",
+    "check": "node render.mjs --check"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.0.14",
+    "@resvg/resvg-js": "^2.4.1",
+    "fast-glob": "^3.3.2",
+    "gray-matter": "^4.0.3",
+    "marked": "^12.0.2",
+    "satori": "^0.10.11",
+    "satori-html": "^0.3.2",
+    "slugify": "^1.6.6"
+  }
+}
