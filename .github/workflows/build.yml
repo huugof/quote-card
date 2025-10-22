@@ -30,7 +30,7 @@ jobs:
 
       - name: Render PNGs and pages
         env:
-          BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || '/' + github.event.repository.name }}
+          BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || format('/{0}', github.event.repository.name) }}
           SITE_ORIGIN: "https://${{ github.repository_owner }}.github.io"
         run: npm run build
 
