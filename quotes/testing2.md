@@ -1,5 +1,5 @@
 ---
-id: testing
+id: testing2
 quote: "we have to look at it with nuance. With that said, all of these things have made me stop and think, “do I really need to download this?"
 name: "Steve Simkins"
 url: "https://stevedylan.dev/posts/programming-bowls"
