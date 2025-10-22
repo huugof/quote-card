@@ -58,8 +58,7 @@ For each source `url`:
 ├─ quotes/                 # Markdown quote files (source of truth)
 │  └─ *.md
 ├─ q/                      # generated: one folder per quote with index.html
-├─ public/
-│  └─ cards/               # generated: PNGs
+├─ cards/                  # generated: PNGs
 ├─ sources/                # generated: per‑URL indexes
 ├─ templates/
 │  ├─ wrapper.html         # OG wrapper template
@@ -79,7 +78,7 @@ For each source `url`:
 npm install
 npm run build     # runs: node render.mjs
 ```
-Outputs PNGs + HTML into `public/cards`, `q`, and `sources`.
+Outputs PNGs + HTML into `cards`, `q`, and `sources`.
 
 ### 5.2 GitHub Actions (recommended)
 Trigger on changes to `quotes/**`:
@@ -110,7 +109,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add public/cards q sources
+          git add cards q sources
           git commit -m "build: quote cards" || echo "Nothing to commit"
           git push
 ```

@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 
 const ROOT_DIR = __dirname;
 const QUOTES_DIR = path.join(ROOT_DIR, 'quotes');
-const OUTPUT_CARD_DIR = path.join(ROOT_DIR, 'public', 'cards');
+const OUTPUT_CARD_DIR = path.join(ROOT_DIR, 'cards');
 const OUTPUT_WRAPPER_DIR = path.join(ROOT_DIR, 'q');
 const OUTPUT_SOURCES_DIR = path.join(ROOT_DIR, 'sources');
 const TEMPLATE_DIR = path.join(ROOT_DIR, 'templates');
@@ -24,6 +24,9 @@ const FONT_DIR = path.join(ROOT_DIR, 'assets', 'fonts');
 
 const CARD_WIDTH = 1200;
 const CARD_HEIGHT = 630;
+
+const BASE_PATH = normalizeBasePath(process.env.BASE_PATH || '');
+const SITE_ORIGIN = normalizeOrigin(process.env.SITE_ORIGIN || '');
 
 marked.setOptions({ mangle: false, headerIds: false });
 
@@ -294,17 +297,21 @@ function buildWrapperPayload(quote) {
     ? `${quote.name} on ${quote.articleTitle}`
     : `${quote.name} on ${quote.sourceDomain}`;
 
+  const cardPath = `/cards/${quote.id}.png`;
+  const ogImage = absoluteUrl(cardPath);
+
   return {
     page_title: escapeHtml(metaTitle),
     meta_description: escapeHtml(description),
     og_title: escapeHtml(metaTitle),
     og_description: escapeHtml(quote.quote),
-    og_image: `/cards/${quote.id}.png`,
+    og_image: escapeHtml(ogImage),
     canonical_url: quote.url,
     source_url: quote.url,
     quote_text: escapeHtml(quote.quote),
     quote_author: escapeHtml(quote.name),
     article_title: quote.articleTitle ? escapeHtml(quote.articleTitle) : '',
+    card_url: escapeHtml(publicPath(cardPath)),
   };
 }
 
@@ -317,8 +324,12 @@ function buildSourceQuoteHtml(quote) {
     parts.push(`  <div class="body">${quote.bodyHtml}</div>`);
   }
   parts.push('  <div class="meta">');
-  parts.push(`    <span><a href="/q/${quote.id}/">Quote page</a></span>`);
-  parts.push(`    <span><a href="/cards/${quote.id}.png">Download PNG</a></span>`);
+  parts.push(
+    `    <span><a href="${escapeHtml(publicPath(`/q/${quote.id}/`))}">Quote page</a></span>`
+  );
+  parts.push(
+    `    <span><a href="${escapeHtml(publicPath(`/cards/${quote.id}.png`))}">Download PNG</a></span>`
+  );
   parts.push('  </div>');
   parts.push('</article>');
   return parts.join('\n');
@@ -383,6 +394,36 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function publicPath(relativePath) {
+  const normalized = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+  return `${BASE_PATH}${normalized}`;
+}
+
+function absoluteUrl(relativePath) {
+  const pathWithBase = publicPath(relativePath);
+  if (!SITE_ORIGIN) {
+    return pathWithBase;
+  }
+  return `${SITE_ORIGIN}${pathWithBase}`;
+}
+
+function normalizeBasePath(input) {
+  if (!input) return '';
+  let result = input.trim();
+  if (!result || result === '/') return '';
+  if (!result.startsWith('/')) {
+    result = `/${result}`;
+  }
+  return result.replace(/\/+$/, '');
+}
+
+function normalizeOrigin(input) {
+  if (!input) return '';
+  const trimmed = input.trim();
+  if (!trimmed) return '';
+  return trimmed.replace(/\/$/, '');
 }
 
 async function renderQuoteSvg(quote, fonts) {

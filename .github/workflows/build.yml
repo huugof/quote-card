@@ -29,12 +29,15 @@ jobs:
         run: npm ci
 
       - name: Render PNGs and pages
+        env:
+          BASE_PATH: "/${{ github.event.repository.name }}"
+          SITE_ORIGIN: "https://${{ github.repository_owner }}.github.io"
         run: npm run build
 
       - name: Commit artifacts
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add public/cards q sources
+          git add cards q sources
           git commit -m "build: quote cards" || echo "Nothing to commit"
           git push

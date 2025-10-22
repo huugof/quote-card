@@ -31,7 +31,7 @@ npm run build
 
 Outputs land in:
 
-- `public/cards/<id>.png` — Open Graph-ready PNG card
+- `cards/<id>.png` — Open Graph-ready PNG card
 - `q/<id>/index.html` — wrapper page with OG/Twitter meta + redirect
 - `sources/<domain>/<slug>/index.html` — grouped quotes per source article
 
@@ -54,4 +54,21 @@ To tweak colors or layout, edit `renderSvg()` inside `render.mjs` and the HTML t
 
 ## Continuous Integration
 
-`.github/workflows/build.yml` installs dependencies, runs `npm run build`, and commits the `public/cards`, `q`, and `sources` directories back to `main` on every push touching quote content or build sources. Enable GitHub Pages for the repo to serve the generated static output.
+## Paths, Base URLs & Social Previews
+
+By default the renderer produces links such as `/cards/<id>.png`. When deploying to a sub-path (e.g. GitHub Pages project site `https://user.github.io/quote-card`), set two environment variables before running the build:
+
+```bash
+export BASE_PATH=/quote-card
+export SITE_ORIGIN=https://user.github.io
+npm run build
+```
+
+- `BASE_PATH` prepends all internal links that start with `/` so they resolve under the project folder.
+- `SITE_ORIGIN` turns relative asset paths into absolute URLs for the Open Graph image tags so social scrapers can fetch the PNG without following redirects.
+
+Leave both empty when serving from your domain root. For user/organization pages (repo named `username.github.io`), keep `BASE_PATH` empty and only set `SITE_ORIGIN` to your live hostname.
+
+## Continuous Integration
+
+`.github/workflows/build.yml` installs dependencies, runs `npm run build`, and commits the `cards`, `q`, and `sources` directories back to `main` on every push touching quote content or build sources. Enable GitHub Pages for the repo to serve the generated static output.
