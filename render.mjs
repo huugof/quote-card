@@ -10,6 +10,7 @@ import { Resvg } from '@resvg/resvg-js';
 import satori from 'satori';
 import { html as parseHtml } from 'satori-html';
 import { marked } from 'marked';
+import { encode as encodeJpeg } from 'jpeg-js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,15 +24,32 @@ const TEMPLATE_DIR = path.join(ROOT_DIR, 'templates');
 const FONT_DIR = path.join(ROOT_DIR, 'assets', 'fonts');
 
 const CARD_WIDTH = 1200;
-const CARD_HEIGHT = 630;
+const CARD_HEIGHT = 628;
+const CARD_PADDING_X = 96;
+const CARD_PADDING_Y = 88;
+const QUOTE_FONT_MAX = 72;
+const QUOTE_FONT_MIN = 34;
+const QUOTE_LINE_HEIGHT = 1.16;
+const QUOTE_AUTHOR_GAP = 28;
+const AUTHOR_FONT_RATIO = 0.48;
+const AUTHOR_FONT_MIN = 24;
+const AUTHOR_LINE_HEIGHT = 1.2;
+const META_FONT_SIZE = 28;
+const META_LINE_HEIGHT = 1.3;
+const META_RESERVED_HEIGHT = META_FONT_SIZE * META_LINE_HEIGHT * 2.2;
+const SPACE_WIDTH_RATIO = 0.35;
+const CHAR_WIDTH_RATIO = 0.6;
+const WIDE_CHAR_BONUS_RATIO = 0.08;
 
 const BASE_PATH = normalizeBasePath(process.env.BASE_PATH || '');
 const SITE_ORIGIN = normalizeOrigin(process.env.SITE_ORIGIN || '');
+const ENV_CARD_VERSION = normalizeCardVersion(process.env.CARD_VERSION || '');
 
 marked.setOptions({ mangle: false, headerIds: false });
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  const cardVersion = args.cardVersion ?? ENV_CARD_VERSION;
 
   const { quotes, warnings, errors } = await loadQuotes();
 
@@ -81,12 +99,20 @@ async function main() {
         value: CARD_WIDTH,
       },
     });
-    const pngBuffer = resvg.render().asPng();
+    const renderResult = resvg.render();
+    const jpeg = encodeJpeg(
+      {
+        data: renderResult.pixels,
+        width: renderResult.width,
+        height: renderResult.height,
+      },
+      88
+    );
 
-    const cardPath = path.join(OUTPUT_CARD_DIR, `${quote.id}.png`);
-    await fs.writeFile(cardPath, pngBuffer);
+    const cardPath = path.join(OUTPUT_CARD_DIR, `${quote.id}.jpg`);
+    await fs.writeFile(cardPath, jpeg.data);
 
-    const wrapperHtml = applyTemplate(wrapperTemplate, buildWrapperPayload(quote));
+    const wrapperHtml = applyTemplate(wrapperTemplate, buildWrapperPayload(quote, cardVersion));
     const wrapperDir = path.join(OUTPUT_WRAPPER_DIR, quote.id);
     await fs.mkdir(wrapperDir, { recursive: true });
     await fs.writeFile(path.join(wrapperDir, 'index.html'), wrapperHtml, 'utf8');
@@ -136,9 +162,43 @@ async function main() {
 }
 
 function parseArgs(argv) {
-  return {
-    check: argv.includes('--check') || argv.includes('--dry-run') || argv.includes('--validate'),
-  };
+  let check = false;
+  let cardVersion = null;
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (!arg) continue;
+
+    if (arg === '--check' || arg === '--dry-run' || arg === '--validate') {
+      check = true;
+      continue;
+    }
+
+    if (arg.startsWith('--card-version=')) {
+      const [, value] = arg.split('=', 2);
+      cardVersion = normalizeCardVersion(value);
+      continue;
+    }
+
+    if (arg === '--card-version' || arg === '--image-version') {
+      const value = argv[i + 1];
+      if (value && !value.startsWith('--')) {
+        cardVersion = normalizeCardVersion(value);
+        i += 1;
+      } else {
+        cardVersion = null;
+      }
+      continue;
+    }
+
+    if (arg.startsWith('--image-version=')) {
+      const [, value] = arg.split('=', 2);
+      cardVersion = normalizeCardVersion(value);
+      continue;
+    }
+  }
+
+  return { check, cardVersion };
 }
 
 async function loadQuotes() {
@@ -291,14 +351,15 @@ async function loadFonts() {
   return loaded;
 }
 
-function buildWrapperPayload(quote) {
+function buildWrapperPayload(quote, cardVersion) {
   const metaTitle = `“${quote.quote}” — ${quote.name}`;
   const description = quote.articleTitle
     ? `${quote.name} on ${quote.articleTitle}`
     : `${quote.name} on ${quote.sourceDomain}`;
 
-  const cardPath = `/cards/${quote.id}.png`;
-  const ogImage = absoluteUrl(cardPath);
+  const cardPath = `/cards/${quote.id}.jpg`;
+  const versionSuffix = cardVersion ? `?v=${encodeURIComponent(cardVersion)}` : '';
+  const ogImage = absoluteUrl(`${cardPath}${versionSuffix}`);
 
   return {
     page_title: escapeHtml(metaTitle),
@@ -328,7 +389,7 @@ function buildSourceQuoteHtml(quote) {
     `    <span><a href="${escapeHtml(publicPath(`/q/${quote.id}/`))}">Quote page</a></span>`
   );
   parts.push(
-    `    <span><a href="${escapeHtml(publicPath(`/cards/${quote.id}.png`))}">Download PNG</a></span>`
+    `    <span><a href="${escapeHtml(publicPath(`/cards/${quote.id}.jpg`))}">Download JPG</a></span>`
   );
   parts.push('  </div>');
   parts.push('</article>');
@@ -426,17 +487,107 @@ function normalizeOrigin(input) {
   return trimmed.replace(/\/$/, '');
 }
 
+function normalizeCardVersion(input) {
+  if (!input) return null;
+  const trimmed = String(input).trim();
+  return trimmed.length ? trimmed : null;
+}
+
+function calculateQuoteTypography(text) {
+  const sanitized = (text || '').replace(/\s+/g, ' ').trim();
+  const availableWidth = CARD_WIDTH - CARD_PADDING_X * 2;
+  const availableHeight = CARD_HEIGHT - CARD_PADDING_Y * 2 - META_RESERVED_HEIGHT;
+
+  let chosenFont = QUOTE_FONT_MIN;
+  let chosenAuthor = Math.max(Math.round(QUOTE_FONT_MIN * AUTHOR_FONT_RATIO), AUTHOR_FONT_MIN);
+
+  if (!sanitized) {
+    return {
+      quoteFontSize: QUOTE_FONT_MAX,
+      authorFontSize: Math.max(Math.round(QUOTE_FONT_MAX * AUTHOR_FONT_RATIO), AUTHOR_FONT_MIN),
+    };
+  }
+
+  for (let size = QUOTE_FONT_MAX; size >= QUOTE_FONT_MIN; size -= 2) {
+    const lines = estimateLineCount(sanitized, size, availableWidth);
+    const authorSize = Math.max(Math.round(size * AUTHOR_FONT_RATIO), AUTHOR_FONT_MIN);
+    const quoteHeight = lines * size * QUOTE_LINE_HEIGHT;
+    const authorHeight = authorSize * AUTHOR_LINE_HEIGHT;
+    const totalHeight = quoteHeight + QUOTE_AUTHOR_GAP + authorHeight;
+
+    if (totalHeight <= availableHeight) {
+      chosenFont = size;
+      chosenAuthor = authorSize;
+      break;
+    }
+  }
+
+  return {
+    quoteFontSize: chosenFont,
+    authorFontSize: chosenAuthor,
+  };
+}
+
+function estimateLineCount(text, fontSize, maxWidth) {
+  const words = text.split(' ');
+  if (!words.length) return 1;
+
+  const spaceWidth = fontSize * SPACE_WIDTH_RATIO;
+  let lineWidth = 0;
+  let lines = 1;
+
+  for (const word of words) {
+    if (!word) continue;
+    const measuredWordWidth = Math.min(estimateWordWidth(word, fontSize), maxWidth);
+
+    if (lineWidth === 0) {
+      lineWidth = measuredWordWidth;
+      continue;
+    }
+
+    if (lineWidth + spaceWidth + measuredWordWidth > maxWidth) {
+      lines += 1;
+      lineWidth = measuredWordWidth;
+    } else {
+      lineWidth += spaceWidth + measuredWordWidth;
+    }
+  }
+
+  return lines;
+}
+
+function estimateWordWidth(word, fontSize) {
+  const length = word.length;
+  if (!length) return 0;
+
+  const wideCharacters = (word.match(/[MW@#&$%]/g) || []).length;
+  const narrowCharacters = (word.match(/[il1']/g) || []).length;
+  const baseWidth = length * CHAR_WIDTH_RATIO;
+  const widthAdjust = wideCharacters * WIDE_CHAR_BONUS_RATIO - narrowCharacters * 0.04;
+  const estimated = Math.max(0.4, baseWidth + widthAdjust);
+  return estimated * fontSize;
+}
+
 async function renderQuoteSvg(quote, fonts) {
+  const { quoteFontSize, authorFontSize } = calculateQuoteTypography(quote.quote);
+  const articleTitleHtml = quote.articleTitle
+    ? `<span style="text-align:right;flex:1 1 40%;">${escapeHtml(quote.articleTitle)}</span>`
+    : '';
+
   const body = `
-    <div style="display:flex;width:${CARD_WIDTH}px;height:${CARD_HEIGHT}px;background:#0f172a;color:#f8fafc;padding:80px;box-sizing:border-box;font-family:'Atkinson Hyperlegible';">
+    <div style="display:flex;width:${CARD_WIDTH}px;height:${CARD_HEIGHT}px;background:#0f172a;color:#f8fafc;padding:${CARD_PADDING_Y}px ${CARD_PADDING_X}px;box-sizing:border-box;font-family:'Atkinson Hyperlegible';">
       <div style="display:flex;flex-direction:column;justify-content:space-between;width:100%;">
-        <div style="display:flex;flex-direction:column;gap:32px;">
-          <div style="font-size:80px;line-height:1.05;font-weight:700;">“${escapeHtml(quote.quote)}”</div>
-          <div style="font-size:36px;opacity:0.85;">${escapeHtml(quote.name)}</div>
+        <div style="display:flex;flex-direction:column;gap:${QUOTE_AUTHOR_GAP}px;">
+          <div style="font-size:${quoteFontSize}px;line-height:${QUOTE_LINE_HEIGHT};font-weight:700;word-break:break-word;white-space:pre-wrap;">“${escapeHtml(
+            quote.quote
+          )}”</div>
+          <div style="font-size:${authorFontSize}px;line-height:${AUTHOR_LINE_HEIGHT};opacity:0.85;">${escapeHtml(
+            quote.name
+          )}</div>
         </div>
-        <div style="font-size:28px;opacity:0.65;display:flex;justify-content:space-between;gap:24px;">
+        <div style="font-size:${META_FONT_SIZE}px;line-height:${META_LINE_HEIGHT};opacity:0.65;display:flex;justify-content:space-between;gap:24px;row-gap:8px;flex-wrap:wrap;">
           <span>${escapeHtml(quote.sourceDomain)}</span>
-          <span>${quote.articleTitle ? escapeHtml(quote.articleTitle) : ''}</span>
+          ${articleTitleHtml}
         </div>
       </div>
     </div>

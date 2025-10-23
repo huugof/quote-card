@@ -1,11 +1,11 @@
 # Quote Cards — Static‑First Specification (v2)
 
-**Goal:** A self‑hosted, portable system that turns Markdown quote files into shareable PNGs and wrapper pages — deployable on any static host with zero server requirements.
+**Goal:** A self‑hosted, portable system that turns Markdown quote files into shareable JPEGs and wrapper pages — deployable on any static host with zero server requirements.
 
 ---
 
 ## 1) Core Principles
-- **Static outputs:** PNG + HTML are the product; any static host works (GitHub Pages, Netlify, Cloudflare Pages, S3+CDN, Nginx).
+- **Static outputs:** JPEG + HTML are the product; any static host works (GitHub Pages, Netlify, Cloudflare Pages, S3+CDN, Nginx).
 - **CI‑rendered:** Rendering happens in CI (e.g., GitHub Actions) or locally — no runtime server needed.
 - **Portable by design:** Minimal dependencies (Node + Satori + Resvg). Docker optional.
 - **Source of truth:** Each quote is a Markdown file with YAML frontmatter in `/quotes`.
@@ -39,15 +39,16 @@ tags: [design, habits]                            # optional
 ## 3) Outputs
 
 For each quote:
-- **PNG:** `/cards/<id>.png` (OG‑sized, 1200×630 default)
+- **JPEG:** `/cards/<id>.jpg` (OG‑sized, 1200×628 default)
 - **Wrapper page:** `/q/<id>/index.html` with OG/Twitter tags and a meta‑refresh back to the original `url`
+  - Social meta tags (`og:image`, `twitter:image`) include a cache-busting query string (e.g., `?v=2`).
 
 For each source `url`:
 - **Source index:** `/sources/<domain>/<article-slug>/index.html` listing all quotes from that article.
 
 **Permalinks:**
 - Quote: `/q/<id>/`
-- Static image: `/cards/<id>.png`
+- Static image: `/cards/<id>.jpg`
 - Source index: `/sources/<domain>/<article-slug>/`
 
 ---
@@ -58,7 +59,7 @@ For each source `url`:
 ├─ quotes/                 # Markdown quote files (source of truth)
 │  └─ *.md
 ├─ q/                      # generated: one folder per quote with index.html
-├─ cards/                  # generated: PNGs
+├─ cards/                  # generated: JPEGs
 ├─ sources/                # generated: per‑URL indexes
 ├─ templates/
 │  ├─ wrapper.html         # OG wrapper template
@@ -77,8 +78,9 @@ For each source `url`:
 ```bash
 npm install
 npm run build     # runs: node render.mjs
+npm run refresh:og  # rebuild cards with ?v=2 cache busting
 ```
-Outputs PNGs + HTML into `cards`, `q`, and `sources`.
+Outputs JPEGs + HTML into `cards`, `q`, and `sources`.
 
 ### 5.2 GitHub Actions (recommended)
 Trigger on changes to `quotes/**`:
@@ -103,7 +105,9 @@ jobs:
         with:
           node-version: 20
       - run: npm ci || npm install
-      - name: Render PNGs & Pages
+      - name: Render JPEGs & Pages
+        env:
+          CARD_VERSION: 2
         run: npm run build
       - name: Commit artifacts
         run: |
@@ -129,7 +133,7 @@ jobs:
    - Using the **Working Copy** app, or
    - Using GitHub’s **mobile app** (manual paste & commit).
 
-The push triggers GitHub Actions → PNG + wrapper generated → Pages updated.
+The push triggers GitHub Actions → JPEG + wrapper generated → Pages updated.
 
 ### 6.2 Other apps (Drafts, iA Writer, Obsidian, VS Code)
 - Template the frontmatter, save into `quotes/`, push to GitHub. Same CI flow.
@@ -140,15 +144,15 @@ The push triggers GitHub Actions → PNG + wrapper generated → Pages updated.
 
 - Modify `render.mjs` → `renderSvg()` for layout, colors, fonts, sizes, quotation mark style.
 - Replace fonts by dropping TTF/OTF in `assets/fonts/` and adjusting the font load section.
-- Default size is **1200×630** for ideal OG previews; can be changed project‑wide.
+- Default size is **1200×628** for ideal OG previews (1.91:1); can be changed project‑wide.
 
 ---
 
 ## 8) Performance & Caching
 
-- PNGs are static files → naturally cacheable by the host/CDN.
+- JPEGs are static files → naturally cacheable by the host/CDN.
 - Use far‑future cache headers if your host supports custom headers; otherwise default host behavior is fine.
-- PNGs are content‑addressed by `id` (immutable); wrappers can be cached as well.
+- JPEGs are content‑addressed by `id` (immutable); wrappers can be cached as well.
 
 ---
 
@@ -189,7 +193,7 @@ The push triggers GitHub Actions → PNG + wrapper generated → Pages updated.
 ## 13) FAQ
 
 **Q: Can pushes from mobile trigger everything?**  
-**A:** Yes. Any method that commits a new `quotes/*.md` file (Shortcuts, Working Copy, GitHub mobile) will trigger the GitHub Actions workflow to build PNGs and pages automatically.
+**A:** Yes. Any method that commits a new `quotes/*.md` file (Shortcuts, Working Copy, GitHub mobile) will trigger the GitHub Actions workflow to build JPEGs and pages automatically.
 
 **Q: Do we need Cloudflare/Vercel?**  
 **A:** No. They’re optional for live previews or dynamic query‑param variants. The static‑first spec needs only your static host + CI.

@@ -1,6 +1,6 @@
 # Quote Cards
 
-Static-first quote card pipeline: Markdown quotes in `quotes/` become PNG cards plus shareable wrapper pages and per-source indexes. Everything builds in CI or locally with Node — no runtime server needed.
+Static-first quote card pipeline: Markdown quotes in `quotes/` become JPEG cards plus shareable wrapper pages and per-source indexes. Everything builds in CI or locally with Node — no runtime server needed.
 
 ## Requirements
 
@@ -31,11 +31,19 @@ npm run build
 
 Outputs land in:
 
-- `cards/<id>.png` — Open Graph-ready PNG card
+- `cards/<id>.jpg` — Open Graph-ready JPEG card (1200×628, 1.91:1)
 - `q/<id>/index.html` — wrapper page with OG/Twitter meta + redirect
 - `sources/<domain>/<slug>/index.html` — grouped quotes per source article
 
 Running the build wipes the three output directories before regenerating files.
+
+### Refresh social previews
+
+```bash
+npm run refresh:og
+```
+
+This regenerates every card and appends `?v=2` to the `og:image` / `twitter:image` URLs so platforms such as X, Facebook, or iMessage invalidate their caches. Bump the `--card-version` value (or set a `CARD_VERSION` env var) whenever you need another refresh.
 
 ## Authoring Quotes
 
@@ -56,7 +64,7 @@ To tweak colors or layout, edit `renderSvg()` inside `render.mjs` and the HTML t
 
 ## Paths, Base URLs & Social Previews
 
-By default the renderer produces links such as `/cards/<id>.png`. When deploying to a sub-path (e.g. GitHub Pages project site `https://user.github.io/quote-card`), set two environment variables before running the build:
+By default the renderer produces links such as `/cards/<id>.jpg`. When deploying to a sub-path (e.g. GitHub Pages project site `https://user.github.io/quote-card`), set two environment variables before running the build:
 
 ```bash
 export BASE_PATH=/quote-card
@@ -65,7 +73,7 @@ npm run build
 ```
 
 - `BASE_PATH` prepends all internal links that start with `/` so they resolve under the project folder.
-- `SITE_ORIGIN` turns relative asset paths into absolute URLs for the Open Graph image tags so social scrapers can fetch the PNG without following redirects.
+- `SITE_ORIGIN` turns relative asset paths into absolute URLs for the Open Graph image tags so social scrapers can fetch the JPEG without following redirects. These URLs include the current cache-busting query string (default `?v=2`).
 
 Leave both empty when serving from your domain root. For user/organization pages (repo named `username.github.io`), keep `BASE_PATH` empty and only set `SITE_ORIGIN` to your live hostname.
 
