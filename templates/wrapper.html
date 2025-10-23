@@ -14,7 +14,6 @@
     <meta name="twitter:title" content="{{og_title}}" />
     <meta name="twitter:description" content="{{og_description}}" />
     <meta name="twitter:image" content="{{og_image}}" />
-    <meta http-equiv="refresh" content="0; url={{source_url}}" />
     <link rel="canonical" href="{{source_url}}" />
     <style>
       :root { color-scheme: light; }
@@ -65,10 +64,7 @@
       {{#article_title}}
       <div class="meta">From <a href="{{source_url}}">{{article_title}}</a></div>
       {{/article_title}}
-      <div class="note">You are being redirected to the original source. If the page does not load automatically, <a href="{{source_url}}">tap here</a>.</div>
+      <div class="note">Read the full context on <a href="{{source_url}}">{{source_url}}</a>.</div>
     </main>
-    <script>
-      window.location.replace("{{source_url}}");
-    </script>
   </body>
 </html>

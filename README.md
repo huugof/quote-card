@@ -32,7 +32,7 @@ npm run build
 Outputs land in:
 
 - `cards/<id>.jpg` — Open Graph-ready JPEG card (1200×628, 1.91:1)
-- `q/<id>/index.html` — wrapper page with OG/Twitter meta + redirect
+- `q/<id>/index.html` — wrapper page with OG/Twitter meta linking back to the original source
 - `sources/<domain>/<slug>/index.html` — grouped quotes per source article
 
 Running the build wipes the three output directories before regenerating files.

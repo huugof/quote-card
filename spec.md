@@ -40,7 +40,7 @@ tags: [design, habits]                            # optional
 
 For each quote:
 - **JPEG:** `/cards/<id>.jpg` (OG‑sized, 1200×628 default)
-- **Wrapper page:** `/q/<id>/index.html` with OG/Twitter tags and a meta‑refresh back to the original `url`
+- **Wrapper page:** `/q/<id>/index.html` with OG/Twitter tags and a prominent link back to the original `url`
   - Social meta tags (`og:image`, `twitter:image`) include a cache-busting query string (e.g., `?v=2`).
 
 For each source `url`:
