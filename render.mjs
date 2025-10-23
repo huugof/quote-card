@@ -25,18 +25,11 @@ const FONT_DIR = path.join(ROOT_DIR, 'assets', 'fonts');
 
 const CARD_WIDTH = 1200;
 const CARD_HEIGHT = 628;
-const CARD_PADDING_X = 96;
-const CARD_PADDING_Y = 88;
+const CARD_PADDING_X = 150;
+const CARD_PADDING_Y = 120;
 const QUOTE_FONT_MAX = 72;
-const QUOTE_FONT_MIN = 34;
-const QUOTE_LINE_HEIGHT = 1.16;
-const QUOTE_AUTHOR_GAP = 28;
-const AUTHOR_FONT_RATIO = 0.48;
-const AUTHOR_FONT_MIN = 24;
-const AUTHOR_LINE_HEIGHT = 1.2;
-const META_FONT_SIZE = 28;
-const META_LINE_HEIGHT = 1.3;
-const META_RESERVED_HEIGHT = META_FONT_SIZE * META_LINE_HEIGHT * 2.2;
+const QUOTE_FONT_MIN = 36;
+const QUOTE_LINE_HEIGHT = 1.32;
 const SPACE_WIDTH_RATIO = 0.35;
 const CHAR_WIDTH_RATIO = 0.6;
 const WIDE_CHAR_BONUS_RATIO = 0.08;
@@ -352,25 +345,35 @@ async function loadFonts() {
 }
 
 function buildWrapperPayload(quote, cardVersion) {
-  const metaTitle = `“${quote.quote}” — ${quote.name}`;
-  const description = quote.articleTitle
-    ? `${quote.name} on ${quote.articleTitle}`
-    : `${quote.name} on ${quote.sourceDomain}`;
+  const sourceDomain = quote.sourceDomain || 'original-source';
+  const articleTitle = quote.articleTitle || sourceDomain;
+  const hasAuthor = Boolean(quote.name);
+
+  let description;
+  if (quote.articleTitle) {
+    description = hasAuthor
+      ? `From ${quote.articleTitle} by ${quote.name}`
+      : `From ${quote.articleTitle} on ${sourceDomain}`;
+  } else {
+    description = hasAuthor
+      ? `${quote.name} on ${sourceDomain}`
+      : `Collected from ${sourceDomain}`;
+  }
 
   const cardPath = `/cards/${quote.id}.jpg`;
   const versionSuffix = cardVersion ? `?v=${encodeURIComponent(cardVersion)}` : '';
   const ogImage = absoluteUrl(`${cardPath}${versionSuffix}`);
 
   return {
-    page_title: escapeHtml(metaTitle),
+    page_title: escapeHtml(articleTitle),
     meta_description: escapeHtml(description),
-    og_title: escapeHtml(metaTitle),
-    og_description: escapeHtml(quote.quote),
+    og_title: escapeHtml(articleTitle),
+    og_description: escapeHtml(description),
     og_image: escapeHtml(ogImage),
     canonical_url: quote.url,
     source_url: quote.url,
     quote_text: escapeHtml(quote.quote),
-    quote_author: escapeHtml(quote.name),
+    quote_author: hasAuthor ? escapeHtml(quote.name) : '',
     article_title: quote.articleTitle ? escapeHtml(quote.articleTitle) : '',
     card_url: escapeHtml(publicPath(cardPath)),
   };
@@ -457,6 +460,14 @@ function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
+function escapeForSatori(value) {
+  if (value === undefined || value === null) return '';
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function publicPath(relativePath) {
   const normalized = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
   return `${BASE_PATH}${normalized}`;
@@ -493,39 +504,25 @@ function normalizeCardVersion(input) {
   return trimmed.length ? trimmed : null;
 }
 
-function calculateQuoteTypography(text) {
+function calculateQuoteFontSize(text) {
   const sanitized = (text || '').replace(/\s+/g, ' ').trim();
   const availableWidth = CARD_WIDTH - CARD_PADDING_X * 2;
-  const availableHeight = CARD_HEIGHT - CARD_PADDING_Y * 2 - META_RESERVED_HEIGHT;
-
-  let chosenFont = QUOTE_FONT_MIN;
-  let chosenAuthor = Math.max(Math.round(QUOTE_FONT_MIN * AUTHOR_FONT_RATIO), AUTHOR_FONT_MIN);
+  const availableHeight = CARD_HEIGHT - CARD_PADDING_Y * 2;
 
   if (!sanitized) {
-    return {
-      quoteFontSize: QUOTE_FONT_MAX,
-      authorFontSize: Math.max(Math.round(QUOTE_FONT_MAX * AUTHOR_FONT_RATIO), AUTHOR_FONT_MIN),
-    };
+    return QUOTE_FONT_MAX;
   }
 
   for (let size = QUOTE_FONT_MAX; size >= QUOTE_FONT_MIN; size -= 2) {
     const lines = estimateLineCount(sanitized, size, availableWidth);
-    const authorSize = Math.max(Math.round(size * AUTHOR_FONT_RATIO), AUTHOR_FONT_MIN);
     const quoteHeight = lines * size * QUOTE_LINE_HEIGHT;
-    const authorHeight = authorSize * AUTHOR_LINE_HEIGHT;
-    const totalHeight = quoteHeight + QUOTE_AUTHOR_GAP + authorHeight;
 
-    if (totalHeight <= availableHeight) {
-      chosenFont = size;
-      chosenAuthor = authorSize;
-      break;
+    if (quoteHeight <= availableHeight) {
+      return size;
     }
   }
 
-  return {
-    quoteFontSize: chosenFont,
-    authorFontSize: chosenAuthor,
-  };
+  return QUOTE_FONT_MIN;
 }
 
 function estimateLineCount(text, fontSize, maxWidth) {
@@ -569,27 +566,13 @@ function estimateWordWidth(word, fontSize) {
 }
 
 async function renderQuoteSvg(quote, fonts) {
-  const { quoteFontSize, authorFontSize } = calculateQuoteTypography(quote.quote);
-  const articleTitleHtml = quote.articleTitle
-    ? `<span style="text-align:right;flex:1 1 40%;">${escapeHtml(quote.articleTitle)}</span>`
-    : '';
+  const quoteFontSize = calculateQuoteFontSize(quote.quote);
 
   const body = `
-    <div style="display:flex;width:${CARD_WIDTH}px;height:${CARD_HEIGHT}px;background:#0f172a;color:#f8fafc;padding:${CARD_PADDING_Y}px ${CARD_PADDING_X}px;box-sizing:border-box;font-family:'Atkinson Hyperlegible';">
-      <div style="display:flex;flex-direction:column;justify-content:space-between;width:100%;">
-        <div style="display:flex;flex-direction:column;gap:${QUOTE_AUTHOR_GAP}px;">
-          <div style="font-size:${quoteFontSize}px;line-height:${QUOTE_LINE_HEIGHT};font-weight:700;word-break:break-word;white-space:pre-wrap;">“${escapeHtml(
-            quote.quote
-          )}”</div>
-          <div style="font-size:${authorFontSize}px;line-height:${AUTHOR_LINE_HEIGHT};opacity:0.85;">${escapeHtml(
-            quote.name
-          )}</div>
-        </div>
-        <div style="font-size:${META_FONT_SIZE}px;line-height:${META_LINE_HEIGHT};opacity:0.65;display:flex;justify-content:space-between;gap:24px;row-gap:8px;flex-wrap:wrap;">
-          <span>${escapeHtml(quote.sourceDomain)}</span>
-          ${articleTitleHtml}
-        </div>
-      </div>
+    <div style="display:flex;width:${CARD_WIDTH}px;height:${CARD_HEIGHT}px;background:#f7f4ec;color:#26211a;padding:${CARD_PADDING_Y}px ${CARD_PADDING_X}px;box-sizing:border-box;font-family:'Atkinson Hyperlegible';align-items:center;justify-content:center;">
+      <div style="font-size:${quoteFontSize}px;line-height:${QUOTE_LINE_HEIGHT};font-weight:400;text-align:center;white-space:pre-wrap;word-break:break-word;max-width:100%;">“${escapeForSatori(
+        quote.quote
+      )}”</div>
     </div>
   `;
 
