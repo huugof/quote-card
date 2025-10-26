@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-26T02:55:44.716Z",
+  "generatedAt": "2025-10-26T03:08:56.024Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -41,6 +41,14 @@
       "sourceKey": "https://100r.co__site-weatheringsoftwarewinterhtml",
       "sourceDomain": "https://100r.co",
       "articleSlug": "site-weatheringsoftwarewinterhtml"
+    },
+    "elle-1kgiaq": {
+      "cardHash": "74354d2631844b34263b3aad9ac0c163ff9870b39fb1ee3e31fbee339dd2edf8",
+      "wrapperHash": "73da61220cf0db5a08b06c9c84d77dae6d5be67702e09e52b8c1c1877fd6825f",
+      "groupItemHash": "1a23b1efb3b088b5c4df2bad1e6ddb6d3daa268261177d5eef5e1d676abc9068",
+      "sourceKey": "ellesho.me__page-website-now",
+      "sourceDomain": "ellesho.me",
+      "articleSlug": "page-website-now"
     },
     "testing": {
       "cardHash": "a690e3389951c7ea8aa8fda933c4adf3533e7ea8bb83538ea66c7d019bbbd49a",
