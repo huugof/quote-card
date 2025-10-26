@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "generatedAt": "2025-10-26T03:12:39.017Z",
+  "cardVersion": "2",
+  "cardRenderVersion": "20240505",
+  "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
+  "fontsHash": "33f07fd59894c6275cafa158e10802eeb1601474a1c6dee173110f59ab36457b",
+  "wrapperRenderVersion": "20240505",
+  "wrapperTemplateHash": "7433cc6a17f72ab4956ac995761006e78f354ac2f2612b14a6557e0236991ee8",
+  "sourceRenderVersion": "20240505",
+  "sourceTemplateHash": "ef104816eb5f5cd821ff8c1b622e6361aec0016d0edbeb4b84114c8a9fef9a0a",
+  "quotes": {
+    "100r-1e5vzc": {
+      "cardHash": "583d85d7075bb4437228ed5e2f4dfca3446e87208515286d20fc51d734eb1b3f",
+      "wrapperHash": "98790073a05e197cbbdb0050d14c43d202c14bbc16503a6cbe0ab94af0533a94",
+      "groupItemHash": "2be0f83f70a4b921750778b42db011a861694c41399df360636c3b78b698486a",
+      "sourceKey": "100r.co__site-weatheringsoftwarewinterhtml",
+      "sourceDomain": "100r.co",
+      "articleSlug": "site-weatheringsoftwarewinterhtml"
+    },
+    "100r-202510295151094": {
+      "cardHash": "afc9dbe7a8c13738ea53e8155650a2cdbd3ad8622683adbb3c88222068404074",
+      "wrapperHash": "8ce9a8700df8955b61b3be71a6f165e1f8f41fa54be65d0369d6bc7bcb242506",
+      "groupItemHash": "b8f87ff696db50c446c3fc081f6c451158e317cdf7884aac3a0a4ea3cb44daf3",
+      "sourceKey": "100r.co__site-weatheringsoftwarewinterhtml",
+      "sourceDomain": "100r.co",
+      "articleSlug": "site-weatheringsoftwarewinterhtml"
+    },
+    "2024-03-21-1200-sample": {
+      "cardHash": "54c4f9dd7467b165c30e26ef886f353a63031ac4e949d5dd997ae8f803a364af",
+      "wrapperHash": "fc5ab9341d3911904690a338f760236ef0427ff6975d62d5cf88234a5136cb33",
+      "groupItemHash": "73bebf9fb6b8441fef8945eb83300ee32c118e955028786cfe1158fb3d17a91c",
+      "sourceKey": "example.com__static-first",
+      "sourceDomain": "example.com",
+      "articleSlug": "static-first"
+    },
+    "2025-10-21-0393-100r": {
+      "cardHash": "80f583a82e2d10cee8ecd1b2f08a230485a9fff3718ffe2c613ddf79bcdc7355",
+      "wrapperHash": "17708cba4187ebfbe9068a6328714047dcbafd5ac5208c11222f0d494bd08e27",
+      "groupItemHash": "be690fb687d82dcdac5a7f2edcddd26a83afac203758e52862ed20882b455fc6",
+      "sourceKey": "https://100r.co__site-weatheringsoftwarewinterhtml",
+      "sourceDomain": "https://100r.co",
+      "articleSlug": "site-weatheringsoftwarewinterhtml"
+    },
+    "artl-pll2n4": {
+      "cardHash": "104193ec92db562b0df33001bf6de894545187a663060c22cbc532ad49842d65",
+      "wrapperHash": "78a140737ec90d5c3e457736103b6787f8d25df598d2f35500ba01fac861144f",
+      "groupItemHash": "acebe507cbe8297d310897de548b7ad19f013cb14c47290d478b37b073cc1142",
+      "sourceKey": "artlu.bearblog.dev__yes-your-keys-not-your-crypto",
+      "sourceDomain": "artlu.bearblog.dev",
+      "articleSlug": "yes-your-keys-not-your-crypto"
+    },
+    "elle-1kgiaq": {
+      "cardHash": "74354d2631844b34263b3aad9ac0c163ff9870b39fb1ee3e31fbee339dd2edf8",
+      "wrapperHash": "73da61220cf0db5a08b06c9c84d77dae6d5be67702e09e52b8c1c1877fd6825f",
+      "groupItemHash": "1a23b1efb3b088b5c4df2bad1e6ddb6d3daa268261177d5eef5e1d676abc9068",
+      "sourceKey": "ellesho.me__page-website-now",
+      "sourceDomain": "ellesho.me",
+      "articleSlug": "page-website-now"
+    },
+    "testing": {
+      "cardHash": "a690e3389951c7ea8aa8fda933c4adf3533e7ea8bb83538ea66c7d019bbbd49a",
+      "wrapperHash": "2c6a4ed8a383508061b37b3f6b83e05f14aac9f302537e62ed94ea7c0b802cef",
+      "groupItemHash": "89f32175687d457d71c3e99bfa2f4b5f462e70e1ab48de384daf3eb300e145cf",
+      "sourceKey": "stevedylan.dev__posts-programming-bowls",
+      "sourceDomain": "stevedylan.dev",
+      "articleSlug": "posts-programming-bowls"
+    },
+    "testing2": {
+      "cardHash": "36cf7e75f26bddd72be77f5bf6e48e6a4f40231174bcd5b5507d6775268edb8c",
+      "wrapperHash": "fd4f453d0ffe841bb21396f57be4ef46bbb9e02e3f9e969c55556e5862306a89",
+      "groupItemHash": "4d3cfac5f0da47485be0f2dca25b5d96e1c1eb26d126157eaf137a0874acaa9b",
+      "sourceKey": "www.ajfriesen.com__modding-an-ipod-classic",
+      "sourceDomain": "www.ajfriesen.com",
+      "articleSlug": "modding-an-ipod-classic"
+    }
+  }
+}
