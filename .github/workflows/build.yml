@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -47,6 +47,18 @@ jobs:
           cp -R cards q sources build/pages/
           if [ -f build-manifest.json ]; then cp build-manifest.json build/pages/; fi
           printf '' > build/pages/.nojekyll
+
+      - name: Commit build manifest
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add build-manifest.json
+          if git diff --cached --quiet; then
+            echo "No manifest changes to commit"
+          else
+            git commit -m "chore: update build manifest"
+            git push
+          fi
 
       - uses: actions/upload-pages-artifact@v3
         with:
