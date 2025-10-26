@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-26T03:12:39.017Z",
+  "generatedAt": "2025-10-26T21:59:33.233Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -49,6 +49,14 @@
       "sourceKey": "artlu.bearblog.dev__yes-your-keys-not-your-crypto",
       "sourceDomain": "artlu.bearblog.dev",
       "articleSlug": "yes-your-keys-not-your-crypto"
+    },
+    "blog-1116ml": {
+      "cardHash": "4a30de479b49fcd24552cf7f9cb301bff93a9dc97a47ee1e6141e8c82ef024e2",
+      "wrapperHash": "c8e02670f77d8725a5302359d8d3429561b7877def51d866756cf6821e9c0739",
+      "groupItemHash": "f6729aa9b6646e46358605186ccbd1fa708a1bd563b3dca3d4036f6db2236264",
+      "sourceKey": "blog.vrypan.net__2025-10-24-snapchain-and-static-blogs",
+      "sourceDomain": "blog.vrypan.net",
+      "articleSlug": "2025-10-24-snapchain-and-static-blogs"
     },
     "elle-1kgiaq": {
       "cardHash": "74354d2631844b34263b3aad9ac0c163ff9870b39fb1ee3e31fbee339dd2edf8",
