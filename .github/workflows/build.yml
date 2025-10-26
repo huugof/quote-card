@@ -11,7 +11,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -34,11 +40,24 @@ jobs:
           SITE_ORIGIN: "https://${{ github.repository_owner }}.github.io"
           CARD_VERSION: 2
         run: npm run build
-
-      - name: Commit artifacts
+      - name: Prepare Pages artifact
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@users.noreply.github.com"
-          git add cards q sources build-manifest.json
-          git commit -m "build: quote cards" || echo "Nothing to commit"
-          git push
+          rm -rf build/pages
+          mkdir -p build/pages
+          cp -R cards q sources build/pages/
+          if [ -f build-manifest.json ]; then cp build-manifest.json build/pages/; fi
+          printf '' > build/pages/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/pages
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
