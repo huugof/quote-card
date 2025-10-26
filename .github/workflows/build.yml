@@ -39,6 +39,6 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add cards q sources
+          git add cards q sources build-manifest.json
           git commit -m "build: quote cards" || echo "Nothing to commit"
           git push
