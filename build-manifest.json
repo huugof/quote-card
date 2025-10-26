@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-26T21:59:33.233Z",
+  "generatedAt": "2025-10-26T22:25:17.732Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -65,6 +65,22 @@
       "sourceKey": "ellesho.me__page-website-now",
       "sourceDomain": "ellesho.me",
       "articleSlug": "page-website-now"
+    },
+    "phon-1aoixf": {
+      "cardHash": "be0642014f46c38cbeb5c8e52d03f57e551d24d3b8a650a7cd025c0fb34600b8",
+      "wrapperHash": "a450394ff67e6c4d385fb37696faf79fe954cf82a2427e35c0f78d67974f58c1",
+      "groupItemHash": "fefa33eb7258a6e53e5ef6db4024ca9ec198340de52d8850082e8747dfab25ef",
+      "sourceKey": "phong.bearblog.dev__be-careful-with-obsidian",
+      "sourceDomain": "phong.bearblog.dev",
+      "articleSlug": "be-careful-with-obsidian"
+    },
+    "phon-1d0z3n": {
+      "cardHash": "afd355caef981648829a4b1e9247734dbaaae4bd3b707ec7aeda15b0e14a63d6",
+      "wrapperHash": "61f2fdd9b5f430b2bd5a00bd5420e941b49aa8c89b6cbe56699d8108c31d24be",
+      "groupItemHash": "a583ad23315d901de8a325984e8d6688661b38663865c9980793ad1457a1e9cd",
+      "sourceKey": "phong.bearblog.dev__memorizing-phone-numbers",
+      "sourceDomain": "phong.bearblog.dev",
+      "articleSlug": "memorizing-phone-numbers"
     },
     "testing": {
       "cardHash": "a690e3389951c7ea8aa8fda933c4adf3533e7ea8bb83538ea66c7d019bbbd49a",
