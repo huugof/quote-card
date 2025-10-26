@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-26T03:08:56.024Z",
+  "generatedAt": "2025-10-26T03:12:39.017Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -41,6 +41,14 @@
       "sourceKey": "https://100r.co__site-weatheringsoftwarewinterhtml",
       "sourceDomain": "https://100r.co",
       "articleSlug": "site-weatheringsoftwarewinterhtml"
+    },
+    "artl-pll2n4": {
+      "cardHash": "104193ec92db562b0df33001bf6de894545187a663060c22cbc532ad49842d65",
+      "wrapperHash": "78a140737ec90d5c3e457736103b6787f8d25df598d2f35500ba01fac861144f",
+      "groupItemHash": "acebe507cbe8297d310897de548b7ad19f013cb14c47290d478b37b073cc1142",
+      "sourceKey": "artlu.bearblog.dev__yes-your-keys-not-your-crypto",
+      "sourceDomain": "artlu.bearblog.dev",
+      "articleSlug": "yes-your-keys-not-your-crypto"
     },
     "elle-1kgiaq": {
       "cardHash": "74354d2631844b34263b3aad9ac0c163ff9870b39fb1ee3e31fbee339dd2edf8",
