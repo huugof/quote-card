@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-26T22:25:17.732Z",
+  "generatedAt": "2025-10-26T22:26:47.844Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -78,6 +78,14 @@
       "cardHash": "afd355caef981648829a4b1e9247734dbaaae4bd3b707ec7aeda15b0e14a63d6",
       "wrapperHash": "61f2fdd9b5f430b2bd5a00bd5420e941b49aa8c89b6cbe56699d8108c31d24be",
       "groupItemHash": "a583ad23315d901de8a325984e8d6688661b38663865c9980793ad1457a1e9cd",
+      "sourceKey": "phong.bearblog.dev__memorizing-phone-numbers",
+      "sourceDomain": "phong.bearblog.dev",
+      "articleSlug": "memorizing-phone-numbers"
+    },
+    "phon-1o8m60": {
+      "cardHash": "13c6c8ee49dda2aab97f25405e683bfc6547025cd364b310caf055bf927fc39e",
+      "wrapperHash": "1e886246ac40db90039ffc335952d81817895c758217842a94eab015665f649d",
+      "groupItemHash": "909af555ddbfcad8a32abc71566c5a6c7006129d083f54cebac1d99df34b8dff",
       "sourceKey": "phong.bearblog.dev__memorizing-phone-numbers",
       "sourceDomain": "phong.bearblog.dev",
       "articleSlug": "memorizing-phone-numbers"
