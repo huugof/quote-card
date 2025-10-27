@@ -3,11 +3,12 @@ name: Build Quote Cards
 on:
   push:
     paths:
-      - 'quotes/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'render.mjs'
-      - 'templates/**'
+      - ".github/workflows/build.yml"
+      - "quotes/**"
+      - "package.json"
+      - "package-lock.json"
+      - "build/render.mjs"
+      - "build/templates/**"
   workflow_dispatch:
 
 permissions:
@@ -29,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -39,6 +40,7 @@ jobs:
           BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || format('/{0}', github.event.repository.name) }}
           SITE_ORIGIN: "https://${{ github.repository_owner }}.github.io"
           CARD_VERSION: 2
+          FORCE_REBUILD: "true"
         run: npm run build
       - name: Prepare Pages artifact
         run: |
