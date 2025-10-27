@@ -26,20 +26,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-go@v5
         with:
-          node-version: 20
-          cache: 'npm'
+          go-version: '1.22'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build renderer
+        run: go build -o quote-cards ./cmd/quote-cards
+
+      - name: Validate quotes
+        env:
+          BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || format('/{0}', github.event.repository.name) }}
+          SITE_ORIGIN: "https://${{ github.repository_owner }}.github.io"
+          CARD_VERSION: 2
+        run: ./quote-cards --check
 
       - name: Render JPEGs and pages
         env:
           BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || format('/{0}', github.event.repository.name) }}
           SITE_ORIGIN: "https://${{ github.repository_owner }}.github.io"
           CARD_VERSION: 2
-        run: npm run build
+        run: ./quote-cards
+
       - name: Prepare Pages artifact
         run: |
           rm -rf build/pages

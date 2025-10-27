@@ -145,6 +145,12 @@ vite.config.ts.timestamp-*
 cards/
 q/
 sources/
+build/pages/
+
+# Go build artifacts
+quote-cards
+quote-cards.exe
+*.test
 
 
 # Codex

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-27T02:19:04.327Z",
-  "cardVersion": "2",
+  "generatedAt": "2025-10-27T18:50:30Z",
+  "cardVersion": null,
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
   "fontsHash": "33f07fd59894c6275cafa158e10802eeb1601474a1c6dee173110f59ab36457b",
@@ -12,120 +12,120 @@
   "quotes": {
     "100r-1e5vzc": {
       "cardHash": "583d85d7075bb4437228ed5e2f4dfca3446e87208515286d20fc51d734eb1b3f",
-      "wrapperHash": "98790073a05e197cbbdb0050d14c43d202c14bbc16503a6cbe0ab94af0533a94",
-      "groupItemHash": "2be0f83f70a4b921750778b42db011a861694c41399df360636c3b78b698486a",
-      "sourceKey": "100r.co__site-weatheringsoftwarewinterhtml",
+      "wrapperHash": "b82a0a16c1db3d98ec85e15d5b505c4cdd3776fef6bcf39e34a59ae64563bf21",
+      "groupItemHash": "09e5e60ff78a21dbb4d6e250dae561607a3a1b9cead339877d2183a63efe4a70",
+      "sourceKey": "100r.co__site-weathering_software_winter-html",
       "sourceDomain": "100r.co",
-      "articleSlug": "site-weatheringsoftwarewinterhtml"
+      "articleSlug": "site-weathering_software_winter-html"
     },
     "100r-202510295151094": {
       "cardHash": "afc9dbe7a8c13738ea53e8155650a2cdbd3ad8622683adbb3c88222068404074",
-      "wrapperHash": "8ce9a8700df8955b61b3be71a6f165e1f8f41fa54be65d0369d6bc7bcb242506",
-      "groupItemHash": "b8f87ff696db50c446c3fc081f6c451158e317cdf7884aac3a0a4ea3cb44daf3",
-      "sourceKey": "100r.co__site-weatheringsoftwarewinterhtml",
+      "wrapperHash": "b25e77e969417d16069ab7487759af80fafda9e8acd9a8c7e691fcdda5dfc916",
+      "groupItemHash": "24131ab651975348c7649dd65261931144abe0c52c6f3e92b5a0193919cc1301",
+      "sourceKey": "100r.co__site-weathering_software_winter-html",
       "sourceDomain": "100r.co",
-      "articleSlug": "site-weatheringsoftwarewinterhtml"
+      "articleSlug": "site-weathering_software_winter-html"
     },
     "2024-03-21-1200-sample": {
       "cardHash": "54c4f9dd7467b165c30e26ef886f353a63031ac4e949d5dd997ae8f803a364af",
-      "wrapperHash": "fc5ab9341d3911904690a338f760236ef0427ff6975d62d5cf88234a5136cb33",
-      "groupItemHash": "73bebf9fb6b8441fef8945eb83300ee32c118e955028786cfe1158fb3d17a91c",
+      "wrapperHash": "cc8a38550dda21d55e44bb9b66480f04a8bdcc60b21af06d722bc910dd2e3b37",
+      "groupItemHash": "b4dd484b5018e0ee57b5e8eb7db6b99fd327af509f950a2b48e42bdbf97bbf76",
       "sourceKey": "example.com__static-first",
       "sourceDomain": "example.com",
       "articleSlug": "static-first"
     },
     "2025-10-21-0393-100r": {
       "cardHash": "80f583a82e2d10cee8ecd1b2f08a230485a9fff3718ffe2c613ddf79bcdc7355",
-      "wrapperHash": "17708cba4187ebfbe9068a6328714047dcbafd5ac5208c11222f0d494bd08e27",
-      "groupItemHash": "be690fb687d82dcdac5a7f2edcddd26a83afac203758e52862ed20882b455fc6",
-      "sourceKey": "https://100r.co__site-weatheringsoftwarewinterhtml",
+      "wrapperHash": "cff5a631c060ede08d6da0f249e80be96e73e2b6c030334939f0b8b89f150202",
+      "groupItemHash": "30829cf93f2a2b89645890019732edd099bb6f025ac18ba8a3488ccc4b6a7310",
+      "sourceKey": "https://100r.co__site-weathering_software_winter-html",
       "sourceDomain": "https://100r.co",
-      "articleSlug": "site-weatheringsoftwarewinterhtml"
+      "articleSlug": "site-weathering_software_winter-html"
     },
     "artl-pll2n4": {
       "cardHash": "104193ec92db562b0df33001bf6de894545187a663060c22cbc532ad49842d65",
-      "wrapperHash": "78a140737ec90d5c3e457736103b6787f8d25df598d2f35500ba01fac861144f",
-      "groupItemHash": "acebe507cbe8297d310897de548b7ad19f013cb14c47290d478b37b073cc1142",
+      "wrapperHash": "7f944eb650f852b8aacfbfafcf6f8956920a754547f4345f892901dfbb12baad",
+      "groupItemHash": "0a6de4aaba37f9848426a57dbf0adbd1dc3ab67beb815824f26e019d53bcdf77",
       "sourceKey": "artlu.bearblog.dev__yes-your-keys-not-your-crypto",
       "sourceDomain": "artlu.bearblog.dev",
       "articleSlug": "yes-your-keys-not-your-crypto"
     },
     "blog-1116ml": {
       "cardHash": "4a30de479b49fcd24552cf7f9cb301bff93a9dc97a47ee1e6141e8c82ef024e2",
-      "wrapperHash": "c8e02670f77d8725a5302359d8d3429561b7877def51d866756cf6821e9c0739",
-      "groupItemHash": "f6729aa9b6646e46358605186ccbd1fa708a1bd563b3dca3d4036f6db2236264",
+      "wrapperHash": "0f50b8474ae4d33052b4df63d93f57e2dc46880e6d386cba82def469b79cf0f7",
+      "groupItemHash": "a1d99e004630c2295257568ec7b1f0a6370b93df1dedbed146e30fefdb525c40",
       "sourceKey": "blog.vrypan.net__2025-10-24-snapchain-and-static-blogs",
       "sourceDomain": "blog.vrypan.net",
       "articleSlug": "2025-10-24-snapchain-and-static-blogs"
     },
     "elle-1kgiaq": {
       "cardHash": "74354d2631844b34263b3aad9ac0c163ff9870b39fb1ee3e31fbee339dd2edf8",
-      "wrapperHash": "73da61220cf0db5a08b06c9c84d77dae6d5be67702e09e52b8c1c1877fd6825f",
-      "groupItemHash": "1a23b1efb3b088b5c4df2bad1e6ddb6d3daa268261177d5eef5e1d676abc9068",
+      "wrapperHash": "9fa62f4325ec08ca55a9c2fe92fe62480f350a5ed0b8b6d599fe035c264f2307",
+      "groupItemHash": "424999b85750ce2128a858205077bf5a86fa390cc95c7cf68c667cfc3212e742",
       "sourceKey": "ellesho.me__page-website-now",
       "sourceDomain": "ellesho.me",
       "articleSlug": "page-website-now"
     },
     "elle-re3b4s": {
       "cardHash": "a9887ad1bc560d2e62b35c9825771dc7f41640df3181a92ddb8d2d4e976bb4d7",
-      "wrapperHash": "e06597f4f690d2876dbe9da2a54c44631b8daf5a360af35ac038a062e31e375a",
-      "groupItemHash": "a6fb851cb1be78c25ac762239c3d23569f1ba5c4eea5692cc9f52e07ae0f2292",
+      "wrapperHash": "423c17b95002078b519d9727b631f3edf28d3ee4b289b5ce097a7452037bcfda",
+      "groupItemHash": "62b19f34abf7a59ac49b05de69006e1d6450cc92c4db955ba380e38520aff4c0",
       "sourceKey": "ellesho.me__page-website-now",
       "sourceDomain": "ellesho.me",
       "articleSlug": "page-website-now"
     },
     "opti-1mnu8v": {
       "cardHash": "0400831d5b90f209d8e22f4cd0b962d084e5b27f734c81264c210cdcd0300a2a",
-      "wrapperHash": "3ee9b003ed0b3e0df4bed4d3c6441b5f4b4ce3a4890b0c44c04136208b55f7fd",
-      "groupItemHash": "25fac555edc8eead8f281608cb7f31c9f284ec8dde67c29e150dcf3c40f79184",
+      "wrapperHash": "cda3ddaab0a2062657e816f7c88d6218321f4f48adcb7bb45fdab2ee1dfb85a6",
+      "groupItemHash": "1ab0b35a45bf8b1a1e6f5712a5a51bc2ddf27a15d526ba3b4b2ee14aca8b139d",
       "sourceKey": "optimism.bearblog.dev__ai-creates-new-systems",
       "sourceDomain": "optimism.bearblog.dev",
       "articleSlug": "ai-creates-new-systems"
     },
     "phon-1aoixf": {
       "cardHash": "be0642014f46c38cbeb5c8e52d03f57e551d24d3b8a650a7cd025c0fb34600b8",
-      "wrapperHash": "a450394ff67e6c4d385fb37696faf79fe954cf82a2427e35c0f78d67974f58c1",
-      "groupItemHash": "fefa33eb7258a6e53e5ef6db4024ca9ec198340de52d8850082e8747dfab25ef",
+      "wrapperHash": "af716ef0667188b1048554157126344a06585cd6fb7a6e63b1fcb201f8a22a4b",
+      "groupItemHash": "22b1ab6c45aa133bd3d2ab97880fdea72b0812cad0c70642a527d31fefa6bcea",
       "sourceKey": "phong.bearblog.dev__be-careful-with-obsidian",
       "sourceDomain": "phong.bearblog.dev",
       "articleSlug": "be-careful-with-obsidian"
     },
     "phon-1d0z3n": {
       "cardHash": "afd355caef981648829a4b1e9247734dbaaae4bd3b707ec7aeda15b0e14a63d6",
-      "wrapperHash": "61f2fdd9b5f430b2bd5a00bd5420e941b49aa8c89b6cbe56699d8108c31d24be",
-      "groupItemHash": "a583ad23315d901de8a325984e8d6688661b38663865c9980793ad1457a1e9cd",
+      "wrapperHash": "ac5aef81e32495767820ca684e5037d582c2a8585d98e28f087f7ca40b541f8d",
+      "groupItemHash": "e0f7eccbbb2f0e3104f7698fb6cbe1256026cdd1f2eb8535894ecfbfeb4e6e2f",
       "sourceKey": "phong.bearblog.dev__memorizing-phone-numbers",
       "sourceDomain": "phong.bearblog.dev",
       "articleSlug": "memorizing-phone-numbers"
     },
     "phon-1o8m60": {
       "cardHash": "13c6c8ee49dda2aab97f25405e683bfc6547025cd364b310caf055bf927fc39e",
-      "wrapperHash": "1e886246ac40db90039ffc335952d81817895c758217842a94eab015665f649d",
-      "groupItemHash": "909af555ddbfcad8a32abc71566c5a6c7006129d083f54cebac1d99df34b8dff",
+      "wrapperHash": "ff3242461223bc5918524144bb8892efdd899bf9831e9c4a768cd6927a12b924",
+      "groupItemHash": "b7ea695f3e54d8b430b7b1005c3d3cf148f6d64692455d1a2db21b8878e3e676",
       "sourceKey": "phong.bearblog.dev__memorizing-phone-numbers",
       "sourceDomain": "phong.bearblog.dev",
       "articleSlug": "memorizing-phone-numbers"
     },
     "testing": {
       "cardHash": "a690e3389951c7ea8aa8fda933c4adf3533e7ea8bb83538ea66c7d019bbbd49a",
-      "wrapperHash": "2c6a4ed8a383508061b37b3f6b83e05f14aac9f302537e62ed94ea7c0b802cef",
-      "groupItemHash": "89f32175687d457d71c3e99bfa2f4b5f462e70e1ab48de384daf3eb300e145cf",
+      "wrapperHash": "9e3f7d0a8e7ba01da39b33c8c99ddd89f5c2733c4ec10f57ac86eb603a1cd90e",
+      "groupItemHash": "71e7750d70d7c465a42f5629e2cc3450f77592faf9984056a52f905733205e3f",
       "sourceKey": "stevedylan.dev__posts-programming-bowls",
       "sourceDomain": "stevedylan.dev",
       "articleSlug": "posts-programming-bowls"
     },
     "testing2": {
       "cardHash": "36cf7e75f26bddd72be77f5bf6e48e6a4f40231174bcd5b5507d6775268edb8c",
-      "wrapperHash": "fd4f453d0ffe841bb21396f57be4ef46bbb9e02e3f9e969c55556e5862306a89",
-      "groupItemHash": "4d3cfac5f0da47485be0f2dca25b5d96e1c1eb26d126157eaf137a0874acaa9b",
+      "wrapperHash": "e43a3c5ddf8baf30f087ada5e60e7fdc00e72ef0fb6de2114b5cd7f8b498e680",
+      "groupItemHash": "b7f6590f1a995c552246aa2f63949bb3a854f8b39249151787272989fc205c83",
       "sourceKey": "www.ajfriesen.com__modding-an-ipod-classic",
       "sourceDomain": "www.ajfriesen.com",
       "articleSlug": "modding-an-ipod-classic"
     },
     "www-1651mp": {
       "cardHash": "92543430486e278530bd59f66b0f5174747196b63966e036a8bf5f2f3317d349",
-      "wrapperHash": "46d380538a4e8ba1ddf2a7b767d7ad67607db4750db54dd21c9b02362be556bd",
-      "groupItemHash": "caba7714ccb21b3ce9b10d4f35d272b8dcdb9060c60c51012fd546fb5b29528d",
+      "wrapperHash": "bb88aeaefe31359d2a08d34d84d166ec8093a6c8ea22206320650b22489ef785",
+      "groupItemHash": "807f3c139f3f70f69f5a29e117d36aa175f37f30b0462d1f6b5dab0062cdf002",
       "sourceKey": "www.gimp.org__index",
       "sourceDomain": "www.gimp.org",
       "articleSlug": "index"

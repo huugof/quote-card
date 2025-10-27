@@ -7,7 +7,7 @@
 ## 1) Core Principles
 - **Static outputs:** JPEG + HTML are the product; any static host works (GitHub Pages, Netlify, Cloudflare Pages, S3+CDN, Nginx).
 - **CI‑rendered:** Rendering happens in CI (e.g., GitHub Actions) or locally — no runtime server needed.
-- **Portable by design:** Minimal dependencies (Node + Satori + Resvg). Docker optional.
+- **Portable by design:** Minimal dependencies (single Go binary with embedded fonts/templates). Docker optional.
 - **Source of truth:** Each quote is a Markdown file with YAML frontmatter in `/quotes`.
 - **Lightweight UX:** Create quotes from phone or computer (Shortcuts, Drafts, Working Copy, GitHub mobile, etc.).
 
@@ -61,12 +61,10 @@ For each source `url`:
 ├─ q/                      # generated: one folder per quote with index.html
 ├─ cards/                  # generated: JPEGs
 ├─ sources/                # generated: per‑URL indexes
-├─ build/
-│  ├─ render.mjs           # build script (Node 18+)
-│  ├─ spec.md              # this document
-│  └─ templates/
-│     ├─ wrapper.html      # OG wrapper template
-│     └─ source.html       # source index template
+├─ cmd/quote-cards/        # CLI entry point for the Go renderer
+├─ internal/               # Go packages (quotes, build orchestration, renderer, templating, static assets)
+│  └─ static/              # Embedded fonts and HTML templates
+├─ build/spec.md           # this document
 ├─ assets/
 │  └─ fonts/               # Atkinson Hyperlegible (bundled locally)
 └─ .github/workflows/build.yml   # CI that renders + commits artifacts
@@ -78,11 +76,12 @@ For each source `url`:
 
 ### 5.1 Local build (optional)
 ```bash
-npm install
-npm run build     # runs: node build/render.mjs
-npm run refresh:og  # rebuild cards with ?v=2 cache busting
+go build -o quote-cards ./cmd/quote-cards
+./quote-cards --check        # schema validation only
+./quote-cards                # render cards, wrappers, sources
+CARD_VERSION=3 ./quote-cards # rebuild cards with ?v=3 cache busting
 ```
-Outputs JPEGs + HTML into `cards`, `q`, and `sources`.
+Outputs JPEGs + HTML into `cards`, `q`, and `sources` while updating `build-manifest.json` for incremental builds.
 
 ### 5.2 GitHub Actions (recommended)
 Trigger on changes to `quotes/**`:
@@ -103,20 +102,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-go@v5
         with:
-          node-version: 20
-      - run: npm ci || npm install
-      - name: Render JPEGs & Pages
+          go-version: 1.22
+      - run: go build -o quote-cards ./cmd/quote-cards
+      - name: Validate front matter
+        run: ./quote-cards --check
+      - name: Render JPEGs & pages
         env:
           CARD_VERSION: 2
-        run: npm run build
-      - name: Commit artifacts
+        run: ./quote-cards
+      - name: Commit manifest
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add cards q sources
-          git commit -m "build: quote cards" || echo "Nothing to commit"
+          git add build-manifest.json
+          git commit -m "chore: update build manifest" || echo "Nothing to commit"
           git push
 ```
 **Hosting:** Enable GitHub Pages for the repo. It will serve `/cards`, `/q`, and `/sources` as static assets.
@@ -144,9 +145,9 @@ The push triggers GitHub Actions → JPEG + wrapper generated → Pages updated.
 
 ## 7) Theming & Layout
 
-- Modify `build/render.mjs` → `renderSvg()` for layout, colors, fonts, sizes, quotation mark style.
-- Replace fonts by dropping TTF/OTF in `assets/fonts/` and adjusting the font load section.
-- Default size is **1200×628** for ideal OG previews (1.91:1); can be changed project‑wide.
+- Update `internal/render` to tweak layout constants, palette, padding, or typography; regenerate to preview changes.
+- Replace fonts by dropping TTF/OTF in `internal/static/fonts/` and adjusting the font load section if weights change.
+- Default size is **1200×628** for ideal OG previews (1.91:1); update the constants in `internal/render` to change it project-wide.
 
 ---
 
@@ -160,17 +161,17 @@ The push triggers GitHub Actions → JPEG + wrapper generated → Pages updated.
 
 ## 9) Portability Notes
 
-- Runs on Node 18+ anywhere (Mac/Win/Linux). Dockerfile provided for container builds.
-- CI examples can be adapted to GitLab, CircleCI, etc.
-- For project‑page URLs (e.g., `/repo-name` base path), ensure templates use relative paths or a configurable `BASE_PATH` if needed.
+- Runs anywhere Go 1.22+ is available (macOS, Windows, Linux). Distribute the compiled binary for repeatable builds.
+- CI examples can be adapted to GitLab, CircleCI, etc.; install Go, compile the CLI, run `./quote-cards`.
+- For project-page URLs (e.g., `/repo-name` base path), keep `BASE_PATH` configurable (env var or flag) so generated links stay correct.
 
 ---
 
 ## 10) Error Handling & Validation
 
-- Build script skips files missing required fields (`id`, `quote`, `name`, `url`) and logs a warning.
-- Optional: add a pre‑commit hook or CI step to validate frontmatter schema.
-- If fonts are missing, Satori will fall back; provide local fonts for consistent results.
+- CLI exits non-zero when required front matter fields (`id`, `quote`, `name`, `url`) are missing or malformed.
+- Optional: add a pre-commit hook or CI step (`./quote-cards --check`) to gate merges.
+- If embedded fonts are replaced, ensure the new TTFs load correctly; parse failures surface as build errors.
 
 ---
 
@@ -208,7 +209,7 @@ The push triggers GitHub Actions → JPEG + wrapper generated → Pages updated.
 ## 14) Deliverables Checklist
 
 - [ ] Repo structure created
-- [ ] Fonts added (`assets/fonts/*.ttf`)
+- [ ] Fonts added (`internal/static/fonts/*.ttf`)
 - [ ] At least one quote in `quotes/`
 - [ ] `build/render.mjs` committed
 - [ ] Templates customized (wrapper/source)
