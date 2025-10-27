@@ -151,7 +151,3 @@ build/pages/
 quote-cards
 quote-cards.exe
 *.test
-
-
-# Codex
-AGENTS.md
