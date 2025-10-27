@@ -8,12 +8,11 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "node render.mjs",
-    "check": "node render.mjs --check",
-    "refresh:og": "node render.mjs --card-version=2"
+    "build": "node build/render.mjs",
+    "check": "node build/render.mjs --check",
+    "refresh:og": "node build/render.mjs --card-version=2"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.0.14",
     "@resvg/resvg-js": "^2.4.1",
     "fast-glob": "^3.3.2",
     "gray-matter": "^4.0.3",

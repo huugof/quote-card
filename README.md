@@ -56,9 +56,9 @@ Optional Markdown body text becomes supporting copy on the source index page.
 
 ## Fonts & Theming
 
-The renderer bundles [Atkinson Hyperlegible](https://github.com/google/fonts/tree/main/ofl/atkinsonhyperlegible) (regular + bold) in `assets/fonts/`. Swap these files if you prefer different typography and adjust the inline styles inside `render.mjs` / templates.
+The renderer bundles [Atkinson Hyperlegible](https://github.com/google/fonts/tree/main/ofl/atkinsonhyperlegible) (regular + bold) in `assets/fonts/`. Swap these files if you prefer different typography and adjust the inline styles inside `build/render.mjs` / templates.
 
-To tweak colors or layout, edit `renderSvg()` inside `render.mjs` and the HTML templates under `templates/`.
+To tweak colors or layout, edit `renderSvg()` inside `build/render.mjs` and the HTML templates under `build/templates/`.
 
 ## Continuous Integration
 

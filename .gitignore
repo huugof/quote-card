@@ -35,7 +35,7 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/
+build/Release/
 
 # Dependency directories
 node_modules/
@@ -145,3 +145,7 @@ vite.config.ts.timestamp-*
 cards/
 q/
 sources/
+
+
+# Codex
+AGENTS.md

@@ -61,12 +61,14 @@ For each source `url`:
 ├─ q/                      # generated: one folder per quote with index.html
 ├─ cards/                  # generated: JPEGs
 ├─ sources/                # generated: per‑URL indexes
-├─ templates/
-│  ├─ wrapper.html         # OG wrapper template
-│  └─ source.html          # source index template
+├─ build/
+│  ├─ render.mjs           # build script (Node 18+)
+│  ├─ spec.md              # this document
+│  └─ templates/
+│     ├─ wrapper.html      # OG wrapper template
+│     └─ source.html       # source index template
 ├─ assets/
-│  └─ fonts/               # Inter-Regular.ttf, Inter-Bold.ttf (or your fonts)
-├─ render.mjs              # build script (Node 18+)
+│  └─ fonts/               # Atkinson Hyperlegible (bundled locally)
 └─ .github/workflows/build.yml   # CI that renders + commits artifacts
 ```
 
@@ -77,7 +79,7 @@ For each source `url`:
 ### 5.1 Local build (optional)
 ```bash
 npm install
-npm run build     # runs: node render.mjs
+npm run build     # runs: node build/render.mjs
 npm run refresh:og  # rebuild cards with ?v=2 cache busting
 ```
 Outputs JPEGs + HTML into `cards`, `q`, and `sources`.
@@ -142,7 +144,7 @@ The push triggers GitHub Actions → JPEG + wrapper generated → Pages updated.
 
 ## 7) Theming & Layout
 
-- Modify `render.mjs` → `renderSvg()` for layout, colors, fonts, sizes, quotation mark style.
+- Modify `build/render.mjs` → `renderSvg()` for layout, colors, fonts, sizes, quotation mark style.
 - Replace fonts by dropping TTF/OTF in `assets/fonts/` and adjusting the font load section.
 - Default size is **1200×628** for ideal OG previews (1.91:1); can be changed project‑wide.
 
@@ -208,7 +210,7 @@ The push triggers GitHub Actions → JPEG + wrapper generated → Pages updated.
 - [ ] Repo structure created
 - [ ] Fonts added (`assets/fonts/*.ttf`)
 - [ ] At least one quote in `quotes/`
-- [ ] `render.mjs` committed
+- [ ] `build/render.mjs` committed
 - [ ] Templates customized (wrapper/source)
 - [ ] GitHub Actions enabled + Pages enabled
 - [ ] Mobile Shortcut or editor template ready
