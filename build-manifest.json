@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-27T17:53:19.737Z",
+  "generatedAt": "2025-10-27T17:56:31.202Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -126,6 +126,14 @@
       "cardHash": "beb3be276c08113c6e13b3ecdf61a891fb2b3ece2d7ff6faee9e1e84c61a5d95",
       "wrapperHash": "a02be4a5a5a1b233c0a5e9a4016bd2ccc9a1a8bd249ca422f33b7e3d660a237e",
       "groupItemHash": "578fda61b66544741dc14f915e35c88231c09e14f5dfc2237316fd745b9af995",
+      "sourceKey": "waitbutwhy.com__2025-10-toddlerhtml",
+      "sourceDomain": "waitbutwhy.com",
+      "articleSlug": "2025-10-toddlerhtml"
+    },
+    "wait-1jmxtv": {
+      "cardHash": "8e191527dbd02dc4ed9afa958926e8d2e5d6f99ce4511a9f60bdbde7f891c7fc",
+      "wrapperHash": "83687d4702482337318cfc3865d4210349ee47885d73653b45c930f9b5a6e892",
+      "groupItemHash": "16844c361a89ecbe841b5bb9aa4a237968b1e2dc398d468b0f55037e6f6a4443",
       "sourceKey": "waitbutwhy.com__2025-10-toddlerhtml",
       "sourceDomain": "waitbutwhy.com",
       "articleSlug": "2025-10-toddlerhtml"
