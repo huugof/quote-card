@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-27T02:17:02.675Z",
+  "generatedAt": "2025-10-27T02:19:04.327Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -73,6 +73,14 @@
       "sourceKey": "ellesho.me__page-website-now",
       "sourceDomain": "ellesho.me",
       "articleSlug": "page-website-now"
+    },
+    "opti-1mnu8v": {
+      "cardHash": "0400831d5b90f209d8e22f4cd0b962d084e5b27f734c81264c210cdcd0300a2a",
+      "wrapperHash": "3ee9b003ed0b3e0df4bed4d3c6441b5f4b4ce3a4890b0c44c04136208b55f7fd",
+      "groupItemHash": "25fac555edc8eead8f281608cb7f31c9f284ec8dde67c29e150dcf3c40f79184",
+      "sourceKey": "optimism.bearblog.dev__ai-creates-new-systems",
+      "sourceDomain": "optimism.bearblog.dev",
+      "articleSlug": "ai-creates-new-systems"
     },
     "phon-1aoixf": {
       "cardHash": "be0642014f46c38cbeb5c8e52d03f57e551d24d3b8a650a7cd025c0fb34600b8",
