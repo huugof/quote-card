@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2025-10-28T12:47:52.892Z",
+  "generatedAt": "2025-10-31T11:41:07.783Z",
   "cardVersion": "2",
   "cardRenderVersion": "20240505",
   "cardRenderHash": "483b3537838dc53eb98bb4d7e5c9e900c226c0138c5eee04350541477eade50b",
@@ -169,6 +169,14 @@
       "sourceKey": "www.familyhandyman.com__article-how-far-apart-should-fence-posts-be",
       "sourceDomain": "www.familyhandyman.com",
       "articleSlug": "article-how-far-apart-should-fence-posts-be"
+    },
+    "www-dqv988": {
+      "cardHash": "210d6e6678946b32c76e734d6b0a5a0e276abbfbcb8dbb58178d02e76a1ee346",
+      "wrapperHash": "2bb499124c3e37f1aaeae33547246a9aab79eaa8615819681dca64ee6b385ad8",
+      "groupItemHash": "b1616da8cd0d8b8ff4b50c97b614a008a944a2d1a4bf55fb532f75695da1d762",
+      "sourceKey": "www.scopeofwork.net__2025-10-27",
+      "sourceDomain": "www.scopeofwork.net",
+      "articleSlug": "2025-10-27"
     }
   }
 }
